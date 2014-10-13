@@ -16,7 +16,7 @@ ini_set('display_errors', 'on');
     <meta charset="UTF-8">
     <title>last.fm widget</title>
     <script src="getTopTags_ajax.js" type="text/javascript"></script>
-    <script src="getTopTracks_ajax.js" type="text/javascript">
+<!--<script src="getTopTracks_ajax.js" type="text/javascript"> -->
     <link rel=StyleSheet href="main.css" type="text/css"/>
 
 <!--
@@ -31,7 +31,8 @@ ini_set('display_errors', 'on');
 <body onload="MakeXMLHTTPCall();">
 
 <div class="widget">
-    <form action="#" onsubmit="return getTopTracks();" method="get">
+    <!--<form action="#" onsubmit="return getTopTracks();" method="get">-->
+    <form action="#" method="GET">
         <ledgend id="legdendt">Last.fm widget</ledgend><hr/>
         <input id="numberOfTracks" type="text" name="textfield" size="5" value="3">
         <input type="submit">
