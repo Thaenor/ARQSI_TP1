@@ -71,10 +71,20 @@ function ATTstateHandler()
             tag = tag + "<option value=\""+ nodelist[i].childNodes[0].nodeValue +"\">" +nodelist[i].childNodes[0].nodeValue + '</option>';
         }
 
+        //displaying info
         var container = document.getElementById('toptags');
         container.innerHTML = tag;
-        var container = document.getElementById('pagestatus');
+        container.style.visibility = 'visible';
+        //defining page status
+        container = document.getElementById('pagestatus');
         container.innerHTML = 'artist\'s top tags displayed, standing by...'
+
+        //showing new buttons and relevant fields
+        container = document.getElementById('numberOfTracks');
+        container.style.visibility = 'visible';
+        container = document.getElementById('TopTracksButt');
+        container.style.visibility = 'visible';
+
     }
 }
 

@@ -14,16 +14,19 @@
 
     <form name="widgetForm" action="#" method="get">
         <ledgend id="legdendt">Last.fm widget</ledgend>
-        <hr/>
+        <hr>
         <div id="pagestatus">waiting user input...</div>
-        <br/><br/>
+        <hr>
         <input id="artistname" type="text" name="artist" value="muse">
         <br>
-        <select id="toptags"></select>
+        <select id="toptags" style= "visibility:hidden"></select>
         <br>
-        <input id="numberOfTracks" type="text" name="textfield" size="14" value="number of tracks">
-        <br/><br/>
-        <input type="button" value="call ajax!" onclick="prepareArtist()">
+        <input type="button" id="TopTagsButt" value="Get top tags!" onclick="prepareArtist()">
+        <br>
+        <input id="numberOfTracks" type="text" name="textfield" size="14" value="10" style="visibility: hidden">
+        <br>
+        <input type="button" id="TopTracksButt" value="Get top tracks!" style="visibility: hidden" onclick="alert('do nothing')">
+
     </form>
 
 </div>
