@@ -20,6 +20,14 @@ if(isset($_REQUEST['tag'])){
 else
     echo 'ERROR: tag not set';
 
-echo 'Im so fuckin high \n';
-echo $limit;
-echo $tag;
+$tag = str_replace(" ", "+", $tag);
+
+$url = "http://ws.audioscrobbler.com/2.0/?method=tag.gettoptracks&tag=$tag&limit=$limit&api_key=50418e615431af81d0ba3193ed478a1d&format=json";
+
+
+if($response= file_get_contents($url) === false){
+    echo "Error in getTopTracks request to last.fm";
+}else {
+    $response= file_get_contents($url);
+    echo $response;
+}

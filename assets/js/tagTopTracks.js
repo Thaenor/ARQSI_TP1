@@ -65,11 +65,17 @@ function TTTstateHandler()
         // propriedade responseText que devolve a resposta do servidor
         doctext = xmlHttpObj.responseText;
 
-        alert(doctext);
-        console.log(doctext);
+        alert('stopping execution here! the reply from the server is OK but I dont know how to treat it yet');
+        throw { name: 'FatalError', message: 'Stopping here!' };
+
+        var json = JSON.stringify(eval("(" + doctext + ")"));
+
+        //alert(json);
+        //console.log(json);
+
         var container = document.getElementById('debug');
-        container.innerHTML = doctext;
+        //container.innerHTML = json.toptracks[1].track;
+
 
     }
 }
-
