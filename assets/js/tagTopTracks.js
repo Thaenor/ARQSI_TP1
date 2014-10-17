@@ -70,8 +70,6 @@ function TTTstateHandler()
 
         var json = JSON.parse(doctext);
 
-        var container = document.getElementById('debug');
-        container.innerHTML = json.toptracks.track[1].name;
         createURLTable(json);
 
     }
@@ -82,9 +80,14 @@ function createURLTable(json){
     var tinfo;
     for (var i in json.toptracks.track){
         console.log(json.toptracks.track[i].name + ' ' + json.toptracks.track[i].url);
-        tinfo = "<tr> <td> <a href=\" "+json.toptracks.track[i].url+"  \">"+json.toptracks.track[i].name+"</a> </td> </tr>"  + tinfo;
+        tinfo = "<tr> <td> <a href=\" "+json.toptracks.track[i].url+"  \" onmouseover='displayInfo()'=>"+json.toptracks.track[i].name+"</a> </td> </tr>"  + tinfo;
     }
     table.innerHTML = tinfo;
     var div = document.getElementsByClassName('divTable');
     div[0].style.visibility = 'visible';
+}
+
+function displayInfo(){
+    var c = document.getElementById('debug');
+    c.innerHTML = 'squirels!';
 }
