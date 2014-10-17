@@ -79,8 +79,12 @@ function TTTstateHandler()
 
 function createURLTable(json){
     var table = document.getElementById('urlTable');
+    var tinfo;
     for (var i in json.toptracks.track){
         console.log(json.toptracks.track[i].name + ' ' + json.toptracks.track[i].url);
-
+        tinfo = "<tr> <td> <a href=\" "+json.toptracks.track[i].url+"  \">"+json.toptracks.track[i].name+"</a> </td> </tr>"  + tinfo;
     }
+    table.innerHTML = tinfo;
+    var div = document.getElementsByClassName('divTable');
+    div[0].style.visibility = 'visible';
 }
