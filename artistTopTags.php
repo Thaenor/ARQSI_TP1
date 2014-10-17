@@ -18,6 +18,7 @@ if(isset($_REQUEST['artist'])){
 else
 echo 'ERROR: artist not set';
 
+$artist = str_replace(" ", "+", $artist);
 
 $urlxml = "http://ws.audioscrobbler.com/2.0/?method=artist.gettoptags&artist=$artist&api_key=68ed3dd100c7eff0e75cb3d44589154f";
 
