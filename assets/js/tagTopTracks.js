@@ -68,14 +68,19 @@ function TTTstateHandler()
         //alert('stopping execution here! the reply from the server is OK but I dont know how to treat it yet');
         //throw { name: 'FatalError', message: 'Stopping here!' };
 
-        //var json = JSON.stringify(eval("(" + doctext + ")"));
         var json = JSON.parse(doctext);
-        //alert(json);
-        console.log(json);
 
         var container = document.getElementById('debug');
         container.innerHTML = json.toptracks.track[1].name;
+        createURLTable(json);
 
+    }
+}
+
+function createURLTable(json){
+    var table = document.getElementById('urlTable');
+    for (var i in json.toptracks.track){
+        console.log(json.toptracks.track[i].name + ' ' + json.toptracks.track[i].url);
 
     }
 }
