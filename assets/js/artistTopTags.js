@@ -8,7 +8,11 @@ var xmlHttpObj;
 var doctext;
 
 function prepareArtist(){
-    var artist = document.getElementById('artistname').value;
+    var artist = document.getElementById('artistname').value.trim();
+    if(artist == ''){
+        alert('artist field cant be empty, try again');
+        throw { name: 'FatalError', message: 'artist field cant be empty, try again!' };
+    }
     var replaced = artist.split(' ').join('+');
 
     /*TODO: some input validation*/
