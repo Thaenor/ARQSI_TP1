@@ -13,7 +13,6 @@ function prepareTrackN(){
     var selec = document.getElementById('toptags');
     var selecTag = selec.options[selec.selectedIndex].value;
 
-    /*IT MAY BE REQUIRED TO PARSE THIS selectTag and REPLACE SPACES WITH PLUS SIGN!!!*/
 
     var ammount = document.getElementById('numberOfTracks').value;
     if( isNaN(ammount) == true ){
@@ -76,18 +75,28 @@ function TTTstateHandler()
 }
 
 function createURLTable(json){
-    var table = document.getElementById('urlTable');
-    var tinfo;
-    for (var i in json.toptracks.track){
-        console.log(json.toptracks.track[i].name + ' ' + json.toptracks.track[i].url);
-        tinfo = "<tr> <td> <a href=\" "+json.toptracks.track[i].url+"  \" onmouseover='displayInfo()'=>"+json.toptracks.track[i].name+"</a> </td> </tr>"  + tinfo;
+    var table = document.getElementById('debug');
+
+    for(var i=1 in json.toptracks.track){
+        var link = document.createElement('a');
+        var method = "checkInfo("+'"'+json.toptracks.track[i].name+'"'+","+'"'+json.toptracks.track[i].artist.name+'"'+")";
+        var linkText = document.createTextNode(json.toptracks.track[i].name);
+        link.appendChild(linkText);
+
+        link.href="javascript:"+method+";";
+        table.appendChild(link);
+        table.innerHTML += '<br>';
     }
-    table.innerHTML = tinfo;
-    var div = document.getElementsByClassName('divTable');
-    div[0].style.visibility = 'visible';
+
+    //var div = document.getElementsByClassName('divTable');
+    //div[0].style.visibility = 'visible';
 }
 
-function displayInfo(){
-    var c = document.getElementById('debug');
-    c.innerHTML = 'squirels!';
-}
+/*
+ var method = "getMoreInfo("+'"'+topTracks[i].artist.name+'"'+","+'"'+topTracks[i].name+'"'+")";
+ a.href="javascript:"+method+";";
+
+ td.innerHTML += '<a onmouseover="'+
+ "getMoreInfo('"+topTracks[i].artist.name+"', '"+topTracks[i].name+"');"
+ +'">'+topTracks[i].name+'</a>';
+ */
