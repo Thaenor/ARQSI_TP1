@@ -75,21 +75,27 @@ function TTTstateHandler()
 }
 
 function createURLTable(json){
-    var table = document.getElementById('debug');
+    var table = document.getElementById('urlTable');
 
     for(var i=1 in json.toptracks.track){
+
+        var tr = document.createElement('tr');
+        var td = document.createElement('td');
+
         var link = document.createElement('a');
         var method = "checkInfo("+'"'+json.toptracks.track[i].name+'"'+","+'"'+json.toptracks.track[i].artist.name+'"'+")";
         var linkText = document.createTextNode(json.toptracks.track[i].name);
         link.appendChild(linkText);
 
         link.href="javascript:"+method+";";
-        table.appendChild(link);
-        table.innerHTML += '<br>';
+        td.appendChild(link);
+        tr.appendChild(td);
+        table.appendChild(tr);
+
     }
 
-    //var div = document.getElementsByClassName('divTable');
-    //div[0].style.visibility = 'visible';
+    var container = document.getElementById('pagestatus');
+    container.innerHTML = 'Top tracks displayed.'
 }
 
 /*

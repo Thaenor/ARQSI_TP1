@@ -9,14 +9,12 @@ var doctext;
 
 function checkInfo(artist, track){
 
-    alert(artist+ " " +track);
-    throw { name: 'FatalError', message: 'Stopping here!' };
-    if(mdid == null){
+    if(artist == null || track == null){
         alert('something went wrong with the tracks');
-        throw { name: 'FatalError', message: 'Invalid mbid!' };
+        throw { name: 'FatalError', message: 'Invalid artist and/or track!' };
     }
 
-    //TGIMakeXMLHTTPCall('trackGetInfo', mbid);
+    TGIMakeXMLHTTPCall('trackGetInfo.php', artist, track);
 }
 
 function TGICreateXmlHttpRequestObject( )
@@ -36,7 +34,7 @@ function TGICreateXmlHttpRequestObject( )
     return xmlHttpObj;
 };
 
-function TGIMakeXMLHTTPCall(method, id)
+function TGIMakeXMLHTTPCall(method, artist, track)
 {
     xmlHttpObj = TGICreateXmlHttpRequestObject();
 
@@ -45,7 +43,7 @@ function TGIMakeXMLHTTPCall(method, id)
         var doc = document.getElementById('pagestatus');
         doc.innerHTML = 'loading...';
         // Definição do URL para efectuar pedido HTTP - método GET
-        xmlHttpObj.open("GET",method+'?id='+id ,true);
+        xmlHttpObj.open("GET",method+'?artist='+artist+'&track='+track ,true);
 
         // Registo do EventHandler
         xmlHttpObj.onreadystatechange = TGIstateHandler;
@@ -62,6 +60,12 @@ function TGIstateHandler()
         doctext = xmlHttpObj.responseText;
 
         console.log(doctext);
+        alert(doctext);
+        if(doctext != null){
+            var container = document.getElementById('debug');
+            container.innerHTML = doctext;
+        }else {alert('no reply from server');}
+
         //alert('stopping execution here! the reply from the server is OK but I dont know how to treat it yet');
         //throw { name: 'FatalError', message: 'Stopping here!' };
 

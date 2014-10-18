@@ -15,15 +15,7 @@ div{
 .widget{
     background-color: #BEB8BF;
     position: absolute;
-    margin-left: 10%;
-    margin-top: 15%;
-    border-style: solid;
-}
-
-.divTable{
-    background-color: #BEB8BF;
-    position: absolute;
-    margin-left: 30%;
+    margin-left: 40%;
     margin-top: 15%;
     border-style: solid;
 }
