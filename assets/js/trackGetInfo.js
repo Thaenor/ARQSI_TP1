@@ -59,14 +59,34 @@ function TGIstateHandler()
         // propriedade responseText que devolve a resposta do servidor
         doctext = xmlHttpObj.responseText;
 
-        console.log(doctext);
-        if(doctext != null){
-            var container = document.getElementById('debug');
-            container.innerHTML = doctext;
-        }else {alert('no reply from server');}
+        var json = JSON.parse(doctext);
+        displayTooltip(json);
+        /*if(doctext != null){
+
+        }else {alert('no reply from server');}*/
 
         //alert('stopping execution here! the reply from the server is OK but I dont know how to treat it yet');
         //throw { name: 'FatalError', message: 'Stopping here!' };
 
     }
+}
+
+function displayTooltip(json){
+
+    var cont = document.getElementById('data');
+    var topAlbum = new Array();
+    for(var i=0; i<3; i++){
+        topAlbum[i] = json.topAlbuns[i];
+        cont.innerHTML += 'top albuns: '+(j=i+1)+": ";
+        cont.innerHTML += topAlbum[i] + "<br>";
+    }
+    var album = json.album;
+    cont.innerHTML += 'album name: ' + album + '<br>';
+    var artist = json.artist;
+    cont.innerHTML += 'name: '+artist + '<br>';
+    //var image = json.image;
+    //cont.innerHTML += image + '<br>';
+    var toptrack = json.toptrack;
+    cont.innerHTML += 'toptrack: ' +toptrack + '<br>';
+
 }
