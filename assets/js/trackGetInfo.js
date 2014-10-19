@@ -59,14 +59,10 @@ function TGIstateHandler()
         // propriedade responseText que devolve a resposta do servidor
         doctext = xmlHttpObj.responseText;
 
-        var json = JSON.parse(doctext);
-        displayTooltip(json);
-        /*if(doctext != null){
-
-        }else {alert('no reply from server');}*/
-
-        //alert('stopping execution here! the reply from the server is OK but I dont know how to treat it yet');
-        //throw { name: 'FatalError', message: 'Stopping here!' };
+        if(doctext != null){
+            var json = JSON.parse(doctext);
+            displayTooltip(json);
+        }else {alert('no reply from server');}
 
     }
 }
@@ -74,6 +70,10 @@ function TGIstateHandler()
 function displayTooltip(json){
 
     var cont = document.getElementById('data');
+    if(cont.hasChildNodes()){
+        cont.innerHTML="";
+    }
+
     var topAlbum = new Array();
     for(var i=0; i<3; i++){
         topAlbum[i] = json.topAlbuns[i];
@@ -84,9 +84,9 @@ function displayTooltip(json){
     cont.innerHTML += 'album name: ' + album + '<br>';
     var artist = json.artist;
     cont.innerHTML += 'name: '+artist + '<br>';
-    //var image = json.image;
-    //cont.innerHTML += image + '<br>';
     var toptrack = json.toptrack;
     cont.innerHTML += 'toptrack: ' +toptrack + '<br>';
+    var image = json.image;
+    cont.innerHTML += "<img src=\""+ image + "\">" +'<br>';
 
 }

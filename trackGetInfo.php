@@ -23,26 +23,17 @@ else
 $artist = str_replace(" ", "+", $artist);
 $track = str_replace(" ", "+", $track);
 
-//nome do album
+//get album name and artist (artist already exists in $artist but was parsed for spaces to compile the url)
 $url = "http://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=68ed3dd100c7eff0e75cb3d44589154f&artist=$artist&track=$track&format=json";
 if ($url = file_get_contents($url)) {
     $json = json_decode($url);
     $album_title = $json->track->album->title;
+    $artistN = $json->track->artist->name;
 } else {
     exit('Failed to open '.$url);
 }
 
-//nome do artista - stored in $artist
-
-//imagem do artista
-/*$url = "http://ws.audioscrobbler.com/2.0/?method=artist.getinfo&artist=$artist&api_key=68ed3dd100c7eff0e75cb3d44589154f&format=json";
-if($url = file_get_contents($url)){
-    $json = json_decode($url);
-    $artist_image = $json->artist->image[1];
-    var_dump($artist_image);
-}*/
-
-//(3) top albuns
+//retrieving the 3 top albums
 $url = "http://ws.audioscrobbler.com/2.0/?method=artist.gettopalbums&artist=$artist&api_key=68ed3dd100c7eff0e75cb3d44589154f&format=json";
 if($url = file_get_contents($url)) {
     $json = json_decode($url);
@@ -52,12 +43,15 @@ if($url = file_get_contents($url)) {
     }
 }
 
-//top track do artista
+//retrieving artist top track & image
 $url="http://ws.audioscrobbler.com/2.0/?method=artist.gettoptracks&artist=$artist&limit=1&api_key=68ed3dd100c7eff0e75cb3d44589154f&format=json";
 if($url = file_get_contents($url)){
     $json = json_decode($url);
     $toptrack = $json->toptracks->track->name;
+    $artist_image = (array) $json->toptracks->track->image[2];
+    $image_url = $artist_image["#text"];
 }
+
 
 //compiling all the information into one JSON file.
 /* Expected format of JSON file:
@@ -81,8 +75,8 @@ $jsonReply = "{
     \"$top_albuns[2]\"
   ],
   \"album\": \"$album_title\",
-  \"artist\": \"$artist\",
-  \"image\": \"na\",
+  \"artist\": \"$artistN\",
+  \"image\": \"$image_url\",
   \"toptrack\": \"$toptrack\"
 }";
 
