@@ -22,10 +22,13 @@ else
 $artist = str_replace(" ", "+", $artist);
 $track = str_replace(" ", "+", $track);
 
-//$urlgetInfo = "http://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=68ed3dd100c7eff0e75cb3d44589154f&artist=$artist&track=$track";
-$urlgetInfo = "http://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=68ed3dd100c7eff0e75cb3d44589154f&artist=$artist&track=$track&format=json";
-//$xml = simplexml_load_file($urlgetInfo);
-//$albumName = (string) $xml->track[0]->album->title;
+$url = "http://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=68ed3dd100c7eff0e75cb3d44589154f&artist=$artist&track=$track";
 
-echo $albumName;
+if (file_get_contents($url)) {
+    $xml = simplexml_load_file($url);
+    $album = $xml->track->album->title;
+    print_r($album);
+} else {
+    exit('Failed to open '.$url);
+}
 

@@ -81,7 +81,7 @@ function ATTstateHandler()
         container.style.visibility = 'visible';
         //defining page status
         container = document.getElementById('pagestatus');
-        container.innerHTML = 'artist\'s top tags displayed, standing by...'
+        container.innerHTML = 'top tags displayed'
 
         //showing new buttons and relevant fields
         container = document.getElementById('numberOfTracks');

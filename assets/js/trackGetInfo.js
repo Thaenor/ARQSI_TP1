@@ -60,7 +60,6 @@ function TGIstateHandler()
         doctext = xmlHttpObj.responseText;
 
         console.log(doctext);
-        alert(doctext);
         if(doctext != null){
             var container = document.getElementById('debug');
             container.innerHTML = doctext;
