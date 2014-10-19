@@ -7,14 +7,14 @@
 var xmlHttpObj;
 var doctext;
 
-function checkInfo(artist, track){
+function checkInfo(track, artist){
 
     if(artist == null || track == null){
         alert('something went wrong with the tracks');
         throw { name: 'FatalError', message: 'Invalid artist and/or track!' };
     }
 
-    TGIMakeXMLHTTPCall('trackGetInfo.php', artist, track);
+    TGIMakeXMLHTTPCall('trackGetInfo.php', track, artist);
 }
 
 function TGICreateXmlHttpRequestObject( )
@@ -34,7 +34,7 @@ function TGICreateXmlHttpRequestObject( )
     return xmlHttpObj;
 };
 
-function TGIMakeXMLHTTPCall(method, artist, track)
+function TGIMakeXMLHTTPCall(method, track, artist)
 {
     xmlHttpObj = TGICreateXmlHttpRequestObject();
 
@@ -43,7 +43,7 @@ function TGIMakeXMLHTTPCall(method, artist, track)
         var doc = document.getElementById('pagestatus');
         doc.innerHTML = 'loading...';
         // Definição do URL para efectuar pedido HTTP - método GET
-        xmlHttpObj.open("GET",method+'?artist='+artist+'&track='+track ,true);
+        xmlHttpObj.open("GET",method+'?track='+track+'&artist='+artist ,true);
 
         // Registo do EventHandler
         xmlHttpObj.onreadystatechange = TGIstateHandler;
