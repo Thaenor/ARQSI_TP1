@@ -22,8 +22,51 @@ if(isset($_REQUEST['long'])){
 else
     echo 'ERROR: longitude id not set';
 
-echo "latitude: $lat & longitude: $long";
-
 //http://www.lastfm.com.br/api/show/geo.getEvents
-$url = "http://ws.audioscrobbler.com/2.0/?method=geo.getevents&lat=$lat&long=$long&api_key=68ed3dd100c7eff0e75cb3d44589154f&format=json";
+$url = "http://ws.audioscrobbler.com/2.0/?method=geo.getevents&lat=$lat&long=$long&limit=5&api_key=68ed3dd100c7eff0e75cb3d44589154f&format=json";
 //DAL($url);
+
+if ($url = file_get_contents($url)) {
+    $json = json_decode($url);
+    $events = array();
+    $eventLat = array();
+    $eventLong = array();
+    for($i=0; $i<5; $i++){
+        $events[] = $json->events->event[$i]->title;
+        $eventStreet[] = $json->events->event[$i]->venue->location->street;
+    }
+} else {
+    exit('Failed to open '.$url);
+}
+
+/*{
+  "title": [
+    "fiesta",
+    "musica ao vivo",
+    "festival das batatas"
+  ],
+  "street": [
+    "rua coisa",
+    "travessa cenas",
+    "campo batatas"
+  ]
+}*/
+
+$jsonReply = "{
+    \"title\": [
+        \"$events[0]\",
+        \"$events[1]\",
+        \"$events[2]\",
+        \"$events[3]\",
+        \"$events[4]\"
+    ],
+  \"street\": [
+        \"$eventStreet[0]\",
+        \"$eventStreet[1]\",
+        \"$eventStreet[2]\",
+        \"$eventStreet[3]\",
+        \"$eventStreet[4]\"
+    ]
+}";
+
+print_r($jsonReply);

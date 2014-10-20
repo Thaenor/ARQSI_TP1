@@ -77,6 +77,10 @@ function TTTstateHandler()
 function createURLTable(json){
     var table = document.getElementById('urlTable');
 
+    if(table != null){
+        table.innerHTML ="";
+    }
+
     for(var i=1 in json.toptracks.track){
 
         var tr = document.createElement('tr');

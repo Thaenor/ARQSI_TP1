@@ -91,4 +91,7 @@ function displayTooltip(json){
     var image = json.image;
     cont.innerHTML += "<img src=\""+ image + "\">" +'<br>';
 
+    var ele = document.getElementById('pagestatus');
+    ele.innerHTML = "Track info displayed";
+
 }

@@ -3,6 +3,8 @@
  */
 
 //geo get events : GGE
+var i=0;
+var locations = new Array();
 
 function getLocation() {
     if (navigator.geolocation) {
@@ -77,10 +79,40 @@ function GGEstateHandler()
     {
         // propriedade responseText que devolve a resposta do servidor
         doctext = xmlHttpObj.responseText;
-
-        //alert('stopping execution here! the reply from the server is OK but I dont know how to treat it yet');
-        //throw { name: 'FatalError', message: 'Stopping here!' };
-        console.log(doctext);
+        if(doctext != null){
+            var json = JSON.parse(doctext);
+            displayEvents(json);
+        }else {alert('no reply from server');}
 
     }
+}
+
+function displayEvents(json){
+    var ele = document.getElementById('selmaps');
+    if(ele != null){
+        ele.innerHTML="";
+    }
+
+    var titles = new Array();
+    //var locations = new Array();
+    for(i=0; i<5; i++){
+        titles[i] = json.title[i];
+        ele.innerHTML += '<option value="'+i+'">'+titles[i]+'</option> <br>';
+        locations[i] = json.street[i].split(' ').join('+');
+
+//ele.innerHTML += '<option value="'+locations[i]+'">'+locations[i]+'</option> <br>';
+    }
+    ele.style.visibility="visible";
+    ele = document.getElementById('mapbutt');
+    ele.style.visibility="visible";
+}
+
+function showmap(){
+    var sel = document.getElementById('selmaps');
+    var selVal = sel.options[sel.selectedIndex].value;
+
+    var cont = document.getElementById('gps');
+    cont.innerHTML = '<iframe src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyDn-UcwMbrIiX8wgyNAlLyHnmqOvZsaddw&origin=Porto&destination='+locations[selVal]+'&zoom=10" editable="true" frameborder="0" style="border:0;"></iframe>';
+
+    cont.style.visibility="visible";
 }
