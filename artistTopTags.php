@@ -7,6 +7,7 @@
  */
 error_reporting(E_ALL);
 ini_set('display_errors', 'on');
+require('DAL.php');
 
 //$api_key = '68ed3dd100c7eff0e75cb3d44589154f';
 //ARQSI 2014
@@ -21,6 +22,7 @@ echo 'ERROR: artist not set';
 $artist = str_replace(" ", "+", $artist);
 
 $urlxml = "http://ws.audioscrobbler.com/2.0/?method=artist.gettoptags&artist=$artist&api_key=68ed3dd100c7eff0e75cb3d44589154f";
+DAL($urlxml);
 
 if($response= file_get_contents($urlxml) === false){
     echo "Error in getTopTags request to last.fm";
@@ -28,3 +30,4 @@ if($response= file_get_contents($urlxml) === false){
     $response= file_get_contents($urlxml);
     echo $response;
 }
+
