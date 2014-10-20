@@ -24,10 +24,12 @@ $artist = str_replace(" ", "+", $artist);
 $track = str_replace(" ", "+", $track);
 
 //get album name and artist (artist already exists in $artist but was parsed for spaces to compile the url)
+//the mbid will be user later to display album cover
 $url = "http://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=68ed3dd100c7eff0e75cb3d44589154f&artist=$artist&track=$track&format=json";
 if ($url = file_get_contents($url)) {
     $json = json_decode($url);
     $album_title = $json->track->album->title;
+    $mbid = $json->track->album->mbid;
     $artistN = $json->track->artist->name;
 } else {
     exit('Failed to open '.$url);
@@ -52,6 +54,12 @@ if($url = file_get_contents($url)){
     $image_url = $artist_image["#text"];
 }
 
+//getting cover art
+$url="http://coverartarchive.org/release/$mbid";
+if($url= file_get_contents($url)){
+    $json = json_decode($url);
+    $coverart = $json->images[0]->thumbnails->small;
+}
 
 //compiling all the information into one JSON file.
 /* Expected format of JSON file:
@@ -64,7 +72,8 @@ if($url = file_get_contents($url)){
   "album": "bananas",
   "artist": "cantoril",
   "image": "something",
-  "toptrack": "tracka"
+  "toptrack": "tracka",
+  "cover": "img"
 }
 */
 
@@ -77,7 +86,8 @@ $jsonReply = "{
   \"album\": \"$album_title\",
   \"artist\": \"$artistN\",
   \"image\": \"$image_url\",
-  \"toptrack\": \"$toptrack\"
+  \"toptrack\": \"$toptrack\",
+  \"cover\": \"$coverart\"
 }";
 
 //print_r(json_encode($jsonReply));

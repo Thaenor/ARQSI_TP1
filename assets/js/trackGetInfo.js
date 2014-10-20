@@ -82,6 +82,8 @@ function displayTooltip(json){
     }
     var album = json.album;
     cont.innerHTML += 'album name: ' + album + '<br>';
+    var coverart = json.cover;
+    cont.innerHTML += "<img src=\""+ coverart + "\">" +'<br>';
     var artist = json.artist;
     cont.innerHTML += 'name: '+artist + '<br>';
     var toptrack = json.toptrack;
