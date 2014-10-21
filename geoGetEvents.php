@@ -6,8 +6,8 @@
  * Time: 19:13
  */
 
-error_reporting(E_ALL);
-ini_set('display_errors', 'on');
+//error_reporting(E_ALL);
+//ini_set('display_errors', 'on');
 require('DAL.php');
 
 if(isset($_REQUEST['lat'])){
@@ -24,7 +24,7 @@ else
 
 //http://www.lastfm.com.br/api/show/geo.getEvents
 $url = "http://ws.audioscrobbler.com/2.0/?method=geo.getevents&lat=$lat&long=$long&limit=5&api_key=68ed3dd100c7eff0e75cb3d44589154f&format=json";
-//DAL($url);
+DAL($url);
 
 if ($url = file_get_contents($url)) {
     $json = json_decode($url);

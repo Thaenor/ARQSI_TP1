@@ -33,6 +33,7 @@
 
 </head>
 <body>
+<h1>Trabalho 1 - Last.fm client widget</h1>
 <div class="widget">
 
     <form name="widgetForm" action="#" method="get">
@@ -41,13 +42,13 @@
         <hr>
         <div id="pagestatus">waiting user input...</div>
         <hr>
-        <input id="artistname" type="text" name="artist" value="muse">
+        <input id="artistname" type="text" name="artist" value="artist">
         <br>
         <select id="toptags" style= "visibility:hidden"></select>
         <br>
         <input type="button" id="TopTagsButt" value="Get top tags!" onclick="prepareArtist()">
         <br>
-        <input id="numberOfTracks" type="text" name="textfield" size="14" value="3" style="visibility: hidden">
+        <input id="numberOfTracks" type="text" name="textfield" size="14" value="number" style="visibility: hidden">
         <br>
         <input type="button" id="TopTracksButt" value="Get top tracks!" style="visibility: hidden" onclick="prepareTrackN()">
         <br>
@@ -69,6 +70,6 @@
 <p style="visibility: hidden">debug area:</p>
 <p id="debug"></p>
 
-
+<a href="readme.html">Help/About us</a>
 </body>
 </html>

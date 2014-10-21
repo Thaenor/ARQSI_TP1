@@ -57,12 +57,19 @@ function TGIstateHandler()
     if ( xmlHttpObj.readyState == 4 && xmlHttpObj.status == 200) // resposta do servidor completa
     {
         // propriedade responseText que devolve a resposta do servidor
-        doctext = xmlHttpObj.responseText;
+        try{
+            doctext = xmlHttpObj.responseText;
 
-        if(doctext != null){
-            var json = JSON.parse(doctext);
-            displayTooltip(json);
-        }else {alert('no reply from server');}
+            if(doctext != null){
+                var json = JSON.parse(doctext);
+                displayTooltip(json);
+            }else {alert('no reply from server');}
+        }catch(err) {
+            alert("error retrieving track info, please see console for info. error: "+err.message);
+            console.log("doctext info:");
+            console.log(doctext);
+        }
+
 
     }
 }

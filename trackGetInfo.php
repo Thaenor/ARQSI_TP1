@@ -5,8 +5,8 @@
  * Date: 17/10/14
  * Time: 16:33
  */
-error_reporting(E_ALL);
-ini_set('display_errors', 'on');
+//error_reporting(E_ALL);
+//ini_set('display_errors', 'on');
 require('DAL.php');
 
 if(isset($_REQUEST['track'])){
@@ -27,7 +27,7 @@ $track = str_replace(" ", "+", $track);
 //get album name and artist (artist already exists in $artist but was parsed for spaces to compile the url)
 //the mbid will be user later to display album cover
 $url = "http://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=68ed3dd100c7eff0e75cb3d44589154f&artist=$artist&track=$track&format=json";
-//DAL($url);
+DAL($url);
 if ($url = file_get_contents($url)) {
     $json = json_decode($url);
     $album_title = $json->track->album->title;

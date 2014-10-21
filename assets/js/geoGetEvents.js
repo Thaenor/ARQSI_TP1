@@ -3,8 +3,8 @@
  */
 
 //geo get events : GGE
-var i=0;
 var locations = new Array();
+var lat, long;
 
 function getLocation() {
     if (navigator.geolocation) {
@@ -15,8 +15,8 @@ function getLocation() {
 }
 
 function showPosition(position) {
-    var lat = position.coords.latitude;
-    var long = position.coords.longitude;
+    lat = position.coords.latitude;
+    long = position.coords.longitude;
     GGEMakeXMLHTTPCall('geoGetEvents.php', lat, long)
 }
 
@@ -95,7 +95,7 @@ function displayEvents(json){
 
     var titles = new Array();
     //var locations = new Array();
-    for(i=0; i<5; i++){
+    for(var i=0; i<5; i++){
         titles[i] = json.title[i];
         ele.innerHTML += '<option value="'+i+'">'+titles[i]+'</option> <br>';
         locations[i] = json.street[i].split(' ').join('+');
@@ -112,7 +112,7 @@ function showmap(){
     var selVal = sel.options[sel.selectedIndex].value;
 
     var cont = document.getElementById('gps');
-    cont.innerHTML = '<iframe src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyDn-UcwMbrIiX8wgyNAlLyHnmqOvZsaddw&origin=Porto&destination='+locations[selVal]+'&zoom=10" editable="true" frameborder="0" style="border:0;"></iframe>';
+    cont.innerHTML = '<iframe src="https://www.google.com/maps/embed/v1/directions?key=AIzaSyDn-UcwMbrIiX8wgyNAlLyHnmqOvZsaddw&origin='+lat+','+long+'&destination='+locations[selVal]+'&zoom=10" editable="true" frameborder="0" style="border:0;"></iframe>';
 
     cont.style.visibility="visible";
 }
